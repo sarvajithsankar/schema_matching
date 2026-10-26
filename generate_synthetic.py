@@ -5,33 +5,61 @@ Generates 5 standard test cases covering:
 2. Renamed columns, identical value distributions (tests value signal)
 3. Similar names, conflicting data types (tests type-mismatch penalty)
 4. Mixed: exact, renamed, and unmatchable columns
-5. Real-world Customer vs Client schema (~8 columns)
+5. Real-world Customer vs Client schema (8 columns)
 
-Saves pairs to data/synthetic/pair_1.json .. pair_5.json
+Seeded, deterministic, and fully reproducible.
+Saves pairs to data/synthetic/pair_1.json .. pair_5.json alongside ground truth files.
 """
 
-import json
 from pathlib import Path
+from typing import Any, Dict, List, Tuple
+import json
+
+from person_a.normalize_names import normalize_column_name
+from shared.contracts import ColumnProfile, validate_column_profile
 from value_pipeline.profiler import build_value_profile
+from value_pipeline.sampler import sample_column
 
 OUTPUT_DIR = Path(__file__).resolve().parent / "data" / "synthetic"
 
 
-def make_column(column_id: str, raw_name: str, tokens: list[str], sample_values: list) -> dict:
-    """Construct a full ColumnProfile object complying with shared data contract."""
-    profile = build_value_profile(sample_values)
-    return {
-        "column_id": column_id,
-        "raw_name": raw_name,
-        "normalized_tokens": tokens,
-        "value_sample": sample_values[:10],
-        "name_embedding": [],
-        "value_profile": profile
-    }
+def make_column(
+    column_id: str,
+    raw_name: str,
+    tokens: List[str],
+    sample_values: List[Any],
+    total_count: int = 100
+) -> Dict[str, Any]:
+    """
+    Construct a full ColumnProfile object complying with shared contracts.
+    """
+    sampled = sample_column(sample_values, n=500, random_state=42)
+    profile = build_value_profile(sampled, total_count=max(total_count, len(sample_values)))
+
+    # Use Person A's normalizer if tokens not provided
+    if not tokens:
+        tokens = normalize_column_name(raw_name)
+
+    schema_name = column_id.split(".")[0] if "." in column_id else "default"
+
+    col_profile = ColumnProfile(
+        column_id=column_id,
+        schema_name=schema_name,
+        raw_name=raw_name,
+        normalized_tokens=tokens,
+        sampled_values=sampled,
+        name_embedding=[],
+        value_profile=profile,
+        data_type=profile["dtype"]
+    )
+
+    # Validate against JSON schema contract
+    validate_column_profile(col_profile)
+    return col_profile.to_dict()
 
 
-def generate_all_pairs() -> list[dict]:
-    pairs = []
+def generate_all_pairs() -> List[Dict[str, Any]]:
+    pairs: List[Dict[str, Any]] = []
 
     # =========================================================================
     # Pair 1: Exact Name Match, Same Values (Sanity check, expect F1 ≈ 1.0)
@@ -106,7 +134,7 @@ def generate_all_pairs() -> list[dict]:
     # =========================================================================
     pair_3_a = [
         make_column("DB1.Profiles.age", "age", ["age"], [25.0, 34.0, 42.0, 19.0, 58.0]),
-        make_column("DB1.Profiles.status", "status", ["status"], ["ACTIVE", "ACTIVE", "PENDING", "ACTIVE", "INACTIVE"]),
+        make_column("DB1.Profiles.status", "status", ["status"], ["ACTIVE", "ACTIVE", "PENDING", "ACTIVE", "INACTIVE"] * 10),
         make_column("DB1.Profiles.score", "score", ["score"], [88.5, 92.0, 79.0, 95.5, 84.0]),
     ]
     pair_3_b = [
@@ -163,7 +191,7 @@ def generate_all_pairs() -> list[dict]:
     cust_phones = ["(555) 234-5678", "(555) 345-6789", "(555) 456-7890", "(555) 567-8901", "(555) 678-9012", "(555) 789-0123"]
     reg_dates = ["2021-04-12", "2021-08-19", "2022-01-05", "2022-06-23", "2023-02-14", "2023-10-09"]
     credit_scores = [720.0, 685.0, 750.0, 610.0, 805.0, 690.0]
-    is_active = ["true", "true", "false", "true", "true", "false"]
+    is_active = ["ACTIVE", "ACTIVE", "INACTIVE", "ACTIVE", "ACTIVE", "INACTIVE"] * 10
 
     pair_5_a = [
         make_column("CRM.Customer.cust_id", "cust_id", ["customer", "id"], c_ids),
@@ -206,14 +234,21 @@ def generate_all_pairs() -> list[dict]:
     return pairs
 
 
-def save_pairs():
+def save_pairs() -> None:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     pairs = generate_all_pairs()
     for i, pair in enumerate(pairs, start=1):
+        # Save full pair json
         file_path = OUTPUT_DIR / f"pair_{i}.json"
         with open(file_path, "w", encoding="utf-8") as f:
             json.dump(pair, f, indent=2)
-        print(f"Saved {file_path.name} with {len(pair['profiles_a'])}x{len(pair['profiles_b'])} columns")
+
+        # Save standalone ground-truth file alongside pair
+        gt_path = OUTPUT_DIR / f"pair_{i}_ground_truth.json"
+        with open(gt_path, "w", encoding="utf-8") as f:
+            json.dump(pair["ground_truth"], f, indent=2)
+
+        print(f"[OK] Saved {file_path.name} and {gt_path.name} with {len(pair['profiles_a'])}x{len(pair['profiles_b'])} columns")
 
 
 if __name__ == "__main__":

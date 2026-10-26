@@ -1,0 +1,14 @@
+[
+  [
+    "App1.Items.sku",
+    "App2.Catalog.product_code"
+  ],
+  [
+    "App1.Items.name",
+    "App2.Catalog.name"
+  ],
+  [
+    "App1.Items.price",
+    "App2.Catalog.cost"
+  ]
+]

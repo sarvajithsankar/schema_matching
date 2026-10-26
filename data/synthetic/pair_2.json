@@ -4,23 +4,16 @@
   "profiles_a": [
     {
       "column_id": "Source.Orders.ref_num",
-      "raw_name": "ref_num",
+      "schema_name": "Source",
       "normalized_tokens": [
         "ref",
         "num"
       ],
-      "value_sample": [
-        "TXN-101",
-        "TXN-102",
-        "TXN-103",
-        "TXN-104",
-        "TXN-105"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "id_code",
+        "inferred_type": "id_code",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.95,
         "length_stats": {
           "min": 7,
           "max": 7,
@@ -31,29 +24,40 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": true,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "TXN-101",
+        "TXN-102",
+        "TXN-103",
+        "TXN-104",
+        "TXN-105"
+      ],
+      "name_embedding": [],
+      "raw_name": "ref_num",
+      "data_type": "id_code",
+      "sample_values": [
+        "TXN-101",
+        "TXN-102",
+        "TXN-103",
+        "TXN-104",
+        "TXN-105"
+      ]
     },
     {
       "column_id": "Source.Orders.contact_phone",
-      "raw_name": "contact_phone",
+      "schema_name": "Source",
       "normalized_tokens": [
         "contact",
         "phone"
       ],
-      "value_sample": [
-        "+1-555-0192",
-        "+1-555-0193",
-        "+1-555-0194",
-        "+1-555-0195",
-        "+1-555-0196"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "string",
+        "inferred_type": "string",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.95,
         "length_stats": {
           "min": 11,
           "max": 11,
@@ -64,18 +68,51 @@
           "looks_like_email": false,
           "looks_like_phone": true,
           "looks_like_id_code": false,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "+1-555-0192",
+        "+1-555-0193",
+        "+1-555-0194",
+        "+1-555-0195",
+        "+1-555-0196"
+      ],
+      "name_embedding": [],
+      "raw_name": "contact_phone",
+      "data_type": "string",
+      "sample_values": [
+        "+1-555-0192",
+        "+1-555-0193",
+        "+1-555-0194",
+        "+1-555-0195",
+        "+1-555-0196"
+      ]
     },
     {
       "column_id": "Source.Orders.placed_on",
-      "raw_name": "placed_on",
+      "schema_name": "Source",
       "normalized_tokens": [
         "placed",
         "on"
       ],
-      "value_sample": [
+      "value_profile": {
+        "dtype": "date",
+        "inferred_type": "date",
+        "cardinality_ratio": 1.0,
+        "null_ratio": 0.95,
+        "length_stats": null,
+        "numeric_stats": null,
+        "pattern_flags": {
+          "looks_like_email": false,
+          "looks_like_phone": false,
+          "looks_like_id_code": false,
+          "looks_like_date_string": true,
+          "looks_like_url": false
+        }
+      },
+      "sampled_values": [
         "2023-01-15",
         "2023-03-22",
         "2023-06-01",
@@ -83,39 +120,28 @@
         "2023-11-30"
       ],
       "name_embedding": [],
-      "value_profile": {
-        "dtype": "date",
-        "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
-        "length_stats": null,
-        "numeric_stats": null,
-        "pattern_flags": {
-          "looks_like_email": false,
-          "looks_like_phone": false,
-          "looks_like_id_code": false,
-          "looks_like_date_string": true
-        }
-      }
+      "raw_name": "placed_on",
+      "data_type": "date",
+      "sample_values": [
+        "2023-01-15",
+        "2023-03-22",
+        "2023-06-01",
+        "2023-09-18",
+        "2023-11-30"
+      ]
     },
     {
       "column_id": "Source.Orders.total_due",
-      "raw_name": "total_due",
+      "schema_name": "Source",
       "normalized_tokens": [
         "total",
         "due"
       ],
-      "value_sample": [
-        49.99,
-        129.5,
-        9.99,
-        899.0,
-        24.5
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "numeric",
+        "inferred_type": "float",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.95,
         "length_stats": null,
         "numeric_stats": {
           "mean": 222.596,
@@ -130,30 +156,41 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": true
+          "looks_like_date_string": true,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        49.99,
+        129.5,
+        9.99,
+        899.0,
+        24.5
+      ],
+      "name_embedding": [],
+      "raw_name": "total_due",
+      "data_type": "numeric",
+      "sample_values": [
+        49.99,
+        129.5,
+        9.99,
+        899.0,
+        24.5
+      ]
     }
   ],
   "profiles_b": [
     {
       "column_id": "Target.Invoices.identifier",
-      "raw_name": "identifier",
+      "schema_name": "Target",
       "normalized_tokens": [
         "identifier"
       ],
-      "value_sample": [
-        "TXN-101",
-        "TXN-102",
-        "TXN-103",
-        "TXN-104",
-        "TXN-105"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "id_code",
+        "inferred_type": "id_code",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.95,
         "length_stats": {
           "min": 7,
           "max": 7,
@@ -164,28 +201,39 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": true,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "TXN-101",
+        "TXN-102",
+        "TXN-103",
+        "TXN-104",
+        "TXN-105"
+      ],
+      "name_embedding": [],
+      "raw_name": "identifier",
+      "data_type": "id_code",
+      "sample_values": [
+        "TXN-101",
+        "TXN-102",
+        "TXN-103",
+        "TXN-104",
+        "TXN-105"
+      ]
     },
     {
       "column_id": "Target.Invoices.telephone",
-      "raw_name": "telephone",
+      "schema_name": "Target",
       "normalized_tokens": [
         "telephone"
       ],
-      "value_sample": [
-        "+1-555-0192",
-        "+1-555-0193",
-        "+1-555-0194",
-        "+1-555-0195",
-        "+1-555-0196"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "string",
+        "inferred_type": "string",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.95,
         "length_stats": {
           "min": 11,
           "max": 11,
@@ -196,18 +244,51 @@
           "looks_like_email": false,
           "looks_like_phone": true,
           "looks_like_id_code": false,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "+1-555-0192",
+        "+1-555-0193",
+        "+1-555-0194",
+        "+1-555-0195",
+        "+1-555-0196"
+      ],
+      "name_embedding": [],
+      "raw_name": "telephone",
+      "data_type": "string",
+      "sample_values": [
+        "+1-555-0192",
+        "+1-555-0193",
+        "+1-555-0194",
+        "+1-555-0195",
+        "+1-555-0196"
+      ]
     },
     {
       "column_id": "Target.Invoices.invoice_date",
-      "raw_name": "invoice_date",
+      "schema_name": "Target",
       "normalized_tokens": [
         "invoice",
         "date"
       ],
-      "value_sample": [
+      "value_profile": {
+        "dtype": "date",
+        "inferred_type": "date",
+        "cardinality_ratio": 1.0,
+        "null_ratio": 0.95,
+        "length_stats": null,
+        "numeric_stats": null,
+        "pattern_flags": {
+          "looks_like_email": false,
+          "looks_like_phone": false,
+          "looks_like_id_code": false,
+          "looks_like_date_string": true,
+          "looks_like_url": false
+        }
+      },
+      "sampled_values": [
         "2023-01-15",
         "2023-03-22",
         "2023-06-01",
@@ -215,39 +296,28 @@
         "2023-11-30"
       ],
       "name_embedding": [],
-      "value_profile": {
-        "dtype": "date",
-        "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
-        "length_stats": null,
-        "numeric_stats": null,
-        "pattern_flags": {
-          "looks_like_email": false,
-          "looks_like_phone": false,
-          "looks_like_id_code": false,
-          "looks_like_date_string": true
-        }
-      }
+      "raw_name": "invoice_date",
+      "data_type": "date",
+      "sample_values": [
+        "2023-01-15",
+        "2023-03-22",
+        "2023-06-01",
+        "2023-09-18",
+        "2023-11-30"
+      ]
     },
     {
       "column_id": "Target.Invoices.amount_charged",
-      "raw_name": "amount_charged",
+      "schema_name": "Target",
       "normalized_tokens": [
         "amount",
         "charged"
       ],
-      "value_sample": [
-        49.99,
-        129.5,
-        9.99,
-        899.0,
-        24.5
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "numeric",
+        "inferred_type": "float",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.95,
         "length_stats": null,
         "numeric_stats": {
           "mean": 222.596,
@@ -262,9 +332,27 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": true
+          "looks_like_date_string": true,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        49.99,
+        129.5,
+        9.99,
+        899.0,
+        24.5
+      ],
+      "name_embedding": [],
+      "raw_name": "amount_charged",
+      "data_type": "numeric",
+      "sample_values": [
+        49.99,
+        129.5,
+        9.99,
+        899.0,
+        24.5
+      ]
     }
   ],
   "ground_truth": [

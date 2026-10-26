@@ -1,10 +1,12 @@
 """Unit tests for value_pipeline.similarity."""
 
 import pytest
+import numpy as np
 from value_pipeline.profiler import build_value_profile
 from value_pipeline.similarity import (
     value_similarity,
     value_similarity_jsd,
+    profile_cosine_similarity,
     weighted_euclidean_distance
 )
 
@@ -19,6 +21,29 @@ def test_identical_profiles_high_similarity():
 
     sim = value_similarity(p1, p2)
     assert sim == pytest.approx(1.0, abs=1e-3)
+
+
+def test_similarity_symmetry_and_range():
+    p1 = build_value_profile([10, 20, 30, 40])
+    p2 = build_value_profile(["alpha", "beta", "gamma"])
+
+    sim_12 = value_similarity(p1, p2)
+    sim_21 = value_similarity(p2, p1)
+
+    assert sim_12 == pytest.approx(sim_21, abs=1e-7)
+    assert 0.0 <= sim_12 <= 1.0
+    assert 0.0 <= sim_21 <= 1.0
+
+
+def test_zero_vector_handling():
+    empty_p1 = build_value_profile([])
+    empty_p2 = build_value_profile([])
+
+    sim = value_similarity(empty_p1, empty_p2)
+    assert 0.0 <= sim <= 1.0
+
+    cos_sim = profile_cosine_similarity(empty_p1, empty_p2)
+    assert 0.0 <= cos_sim <= 1.0
 
 
 def test_dtype_mismatch_low_similarity():
@@ -43,7 +68,7 @@ def test_value_similarity_jsd_numeric():
 
     sim_jsd = value_similarity_jsd(p1, p2)
     assert 0.0 <= sim_jsd <= 1.0
-    assert sim_jsd > 0.8  # Very similar numeric distributions
+    assert sim_jsd > 0.8
 
 
 def test_value_similarity_jsd_fallback_non_numeric():
@@ -52,6 +77,5 @@ def test_value_similarity_jsd_fallback_non_numeric():
     p1 = build_value_profile(s1)
     p2 = build_value_profile(s2)
 
-    # Should fall back to value_similarity without error
     sim_jsd = value_similarity_jsd(p1, p2)
     assert 0.0 <= sim_jsd <= 1.0

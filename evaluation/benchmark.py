@@ -1,40 +1,49 @@
 """
 Benchmarking harness for schema matching.
-Loads benchmark pairs, executes matchers, and computes comparative performance tables.
+Loads benchmark pairs from synthetic and Valentine datasets,
+executes Adaptive Fusion against 3 baselines (Name-Only, Value-Only, Fixed-Fusion),
+prints detailed per-scenario and overall comparative tables,
+and exports results to evaluation/results.csv.
 """
 
 from pathlib import Path
-from typing import Callable, Dict, List, Optional
+from typing import Any, Callable, Dict, List, Optional, Tuple
+import csv
 import json
 import numpy as np
 
-from evaluation.metrics import compute_metrics
+from evaluation.metrics import compute_metrics, compute_macro_metrics
 from evaluation.baselines import (
     baseline_name_only,
     baseline_value_only,
-    baseline_fixed_fusion
+    baseline_fixed_fusion,
+    adaptive_matcher,
 )
+from data.valentine.loader import load_all_valentine_pairs
 
 DEFAULT_SYNTHETIC_DIR = Path(__file__).resolve().parent.parent / "data" / "synthetic"
+DEFAULT_RESULTS_CSV = Path(__file__).resolve().parent / "results.csv"
 
 
 def load_synthetic_pairs(synthetic_dir: Optional[str] = None) -> List[dict]:
     """
-    Load the synthetic schema pairs from data/synthetic/.
-    Each pair is a JSON file with keys: profiles_a, profiles_b, ground_truth,
-    and optional description / pair_id.
+    Load synthetic schema pairs from data/synthetic/.
+    Excludes standalone ground-truth JSON files.
     """
     target_dir = Path(synthetic_dir) if synthetic_dir else DEFAULT_SYNTHETIC_DIR
     if not target_dir.exists():
         return []
 
     pairs = []
-    # Sort file paths so pair_1, pair_2, etc. are in order
-    files = sorted(list(target_dir.glob("*.json")))
+    # Filter only pair_*.json that are not *_ground_truth.json
+    files = sorted([
+        f for f in target_dir.glob("pair_*.json")
+        if not f.name.endswith("_ground_truth.json")
+    ])
+
     for f in files:
         with open(f, "r", encoding="utf-8") as fp:
             data = json.load(fp)
-            # Ensure ground_truth entries are tuples
             if "ground_truth" in data:
                 data["ground_truth"] = [tuple(item) for item in data["ground_truth"]]
             if "file_name" not in data:
@@ -42,6 +51,24 @@ def load_synthetic_pairs(synthetic_dir: Optional[str] = None) -> List[dict]:
             pairs.append(data)
 
     return pairs
+
+
+def load_all_benchmark_pairs(
+    synthetic_dir: Optional[str] = None,
+    valentine_dir: Optional[str] = None
+) -> List[dict]:
+    """
+    Load all benchmark pairs combining synthetic and Valentine datasets.
+    """
+    all_pairs: List[dict] = []
+
+    synthetic_pairs = load_synthetic_pairs(synthetic_dir)
+    all_pairs.extend(synthetic_pairs)
+
+    val_pairs = load_all_valentine_pairs(valentine_dir)
+    all_pairs.extend(val_pairs)
+
+    return all_pairs
 
 
 def run_benchmark(
@@ -61,10 +88,8 @@ def run_benchmark(
             "pair_results": []
         }
 
-    precisions = []
-    recalls = []
-    f1s = []
     pair_results = []
+    metrics_list = []
 
     for pair in schema_pairs:
         profiles_a = pair.get("profiles_a", [])
@@ -74,51 +99,122 @@ def run_benchmark(
         matches = matcher_fn(profiles_a, profiles_b, **matcher_kwargs)
         metrics = compute_metrics(matches, gt)
 
-        precisions.append(metrics["precision"])
-        recalls.append(metrics["recall"])
-        f1s.append(metrics["f1"])
-
+        metrics_list.append(metrics)
         pair_results.append({
             "pair_id": pair.get("pair_id", pair.get("file_name", "unknown")),
             "description": pair.get("description", ""),
             "metrics": metrics,
-            "matches": matches
+            "matches": [m.to_dict() if hasattr(m, "to_dict") else m for m in matches]
         })
 
+    macro = compute_macro_metrics(metrics_list)
+
     return {
-        "mean_precision": round(float(np.mean(precisions)), 4),
-        "mean_recall": round(float(np.mean(recalls)), 4),
-        "mean_f1": round(float(np.mean(f1s)), 4),
+        "mean_precision": macro["mean_precision"],
+        "mean_recall": macro["mean_recall"],
+        "mean_f1": macro["mean_f1"],
         "pair_results": pair_results
     }
 
 
-def print_comparison_table(results: Dict[str, dict]):
-    """Print an ASCII comparison table across all evaluated baseline matchers."""
-    print("\n" + "=" * 78)
-    print(" " * 22 + "SCHEMA MATCHING BENCHMARK RESULTS")
-    print("=" * 78)
-    print(f"{'Matcher Baseline':<25} | {'Mean Precision':<15} | {'Mean Recall':<15} | {'Mean F1':<15}")
-    print("-" * 78)
+def print_comparison_table(results: Dict[str, dict], schema_pairs: List[dict]):
+    """
+    Print an ASCII comparison table showing per-scenario and overall results.
+    """
+    print("\n" + "=" * 88)
+    print(" " * 24 + "SCHEMA MATCHING BENCHMARK RESULTS")
+    print("=" * 88)
+
+    # 1. Per-Scenario breakdown
+    for i, pair in enumerate(schema_pairs, 1):
+        pid = pair.get("pair_id", f"pair_{i}")
+        desc = pair.get("description", "")
+        print(f"\nScenario: {pid} - {desc}")
+        print(f"{'Matcher':<30} | {'Precision':<15} | {'Recall':<15} | {'F1':<15}")
+        print("-" * 88)
+        for m_name, res in results.items():
+            # Find metrics for this pair
+            p_res = next((p for p in res["pair_results"] if p["pair_id"] == pid), None)
+            if p_res:
+                m = p_res["metrics"]
+                print(f"{m_name:<30} | {m['precision']:<15.4f} | {m['recall']:<15.4f} | {m['f1']:<15.4f}")
+
+    # 2. Overall Summary Table
+    print("\n" + "=" * 88)
+    print(" " * 28 + "OVERALL MACRO SUMMARY")
+    print("=" * 88)
+    print(f"{'Matcher Strategy':<30} | {'Mean Precision':<15} | {'Mean Recall':<15} | {'Mean F1':<15}")
+    print("-" * 88)
     for name, res in results.items():
         p = f"{res['mean_precision']:.4f}"
         r = f"{res['mean_recall']:.4f}"
         f = f"{res['mean_f1']:.4f}"
-        print(f"{name:<25} | {p:<15} | {r:<15} | {f:<15}")
-    print("=" * 78)
+        print(f"{name:<30} | {p:<15} | {r:<15} | {f:<15}")
+    print("=" * 88 + "\n")
+
+
+def save_results_to_csv(
+    results: Dict[str, dict],
+    schema_pairs: List[dict],
+    csv_path: Optional[Path] = None
+) -> Path:
+    """
+    Save per-scenario and overall macro benchmark results to CSV.
+    """
+    output_path = csv_path if csv_path else DEFAULT_RESULTS_CSV
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(output_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Scenario", "Description", "Matcher", "Precision", "Recall", "F1", "TP", "FP", "FN"])
+
+        for pair in schema_pairs:
+            pid = pair.get("pair_id", "")
+            desc = pair.get("description", "")
+            for m_name, res in results.items():
+                p_res = next((p for p in res["pair_results"] if p["pair_id"] == pid), None)
+                if p_res:
+                    m = p_res["metrics"]
+                    writer.writerow([pid, desc, m_name, m["precision"], m["recall"], m["f1"], m["tp"], m["fp"], m["fn"]])
+
+        # Summary rows
+        for m_name, res in results.items():
+            writer.writerow([
+                "OVERALL_MEAN",
+                "Macro average across all pairs",
+                m_name,
+                res["mean_precision"],
+                res["mean_recall"],
+                res["mean_f1"],
+                "", "", ""
+            ])
+
+    print(f"[OK] Results saved to {output_path}")
+    return output_path
+
+
+def main():
+    pairs = load_all_benchmark_pairs()
+    if not pairs:
+        print("[ERROR] No benchmark pairs found. Run python generate_synthetic.py first.")
+        return
+
+    print(f"Loaded {len(pairs)} benchmark schema pairs.")
+
+    matchers = {
+        "1. Name-Only Baseline": baseline_name_only,
+        "2. Value-Only Baseline": baseline_value_only,
+        "3. Fixed-Fusion (alpha=0.5)": baseline_fixed_fusion,
+        "4. Adaptive Fusion": adaptive_matcher,
+    }
+
+    benchmark_results: Dict[str, dict] = {}
+    for name, fn in matchers.items():
+        benchmark_results[name] = run_benchmark(pairs, fn)
+
+    print_comparison_table(benchmark_results, pairs)
+    save_results_to_csv(benchmark_results, pairs)
 
 
 if __name__ == "__main__":
-    pairs = load_synthetic_pairs()
-    if not pairs:
-        print("No synthetic pairs found. Run generate_synthetic.py first.")
-    else:
-        print(f"Loaded {len(pairs)} synthetic benchmark schema pairs.")
-
-        baseline_results = {
-            "1. Name-Only Baseline": run_benchmark(pairs, baseline_name_only),
-            "2. Value-Only Baseline": run_benchmark(pairs, baseline_value_only),
-            "3. Fixed-Fusion (alpha=0.5)": run_benchmark(pairs, baseline_fixed_fusion),
-        }
-
-        print_comparison_table(baseline_results)
+    main()

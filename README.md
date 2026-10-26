@@ -77,7 +77,35 @@ Generated pairs are written to `data/synthetic/`.
 python -m evaluation.benchmark
 ```
 
-The benchmark compares name-only, value-only, and fixed-fusion baselines and reports mean precision, recall, and F1 scores.
+The benchmark compares Adaptive Fusion against Name-Only, Value-Only, and Fixed-Fusion baselines across all benchmark scenarios, reports per-scenario and mean precision, recall, and F1 scores, and writes outputs to `evaluation/results.csv`.
+
+## Results
+
+Across the 5 synthetic benchmark scenarios, the matchers achieve the following macro performance:
+
+| Matcher Strategy | Mean Precision | Mean Recall | Mean F1 |
+| :--- | :--- | :--- | :--- |
+| **1. Name-Only Baseline** | 0.6667 | 0.5917 | 0.5538 |
+| **2. Value-Only Baseline** | 0.9000 | 1.0000 | 0.9333 |
+| **3. Fixed-Fusion (alpha=0.5)** | 0.8667 | 1.0000 | 0.9000 |
+| **4. Adaptive Fusion** | 0.8667 | 1.0000 | 0.9000 |
+
+### Per-Scenario Breakdown
+
+- **Pair 1 (Exact Match)**: All matchers achieve P=1.0, R=1.0, F1=1.0.
+- **Pair 2 (Renamed Columns, Same Values)**: Value-Only, Fixed-Fusion, and Adaptive Fusion achieve F1=1.0, while Name-Only fails completely (F1=0.0).
+- **Pair 3 (Similar Names, Conflicting Types)**: Name-Only (F1=0.50), Fixed-Fusion (F1=0.50), and Adaptive Fusion (F1=0.50) are penalized by identical column names with mismatched value profiles (`age` numeric vs date). Value-Only achieves higher precision (P=0.50, F1=0.6667) because it relies solely on value divergence.
+- **Pair 4 (Mixed Matchability)**: Value-Only, Fixed-Fusion, and Adaptive Fusion achieve F1=1.0, whereas Name-Only misses renamed columns (R=0.3333, F1=0.50).
+- **Pair 5 (Customer vs Client Schemas)**: Value-Only, Fixed-Fusion, and Adaptive Fusion achieve F1=1.0, whereas Name-Only achieves F1=0.7692.
+
+## Valentine Benchmark Datasets
+
+External datasets from the Valentine schema matching benchmark (e.g., ChFin, OpenData, Magellan) can be evaluated by placing dataset directories in `data/valentine/<dataset_name>/`. Each folder should contain:
+- `source.csv` (or `table1.csv`)
+- `target.csv` (or `table2.csv`)
+- `ground_truth.csv` (with `src_col,tgt_col,is_match` or `source,target`)
+
+If no Valentine datasets are present, the benchmark harness skips them gracefully.
 
 ## Run tests
 

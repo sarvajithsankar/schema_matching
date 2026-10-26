@@ -33,8 +33,38 @@ def test_sample_column_filters_nulls():
     assert len(sampled) == 2
 
 
-def test_sample_column_none_input():
+def test_sample_column_none_and_empty():
     assert sample_column(None, n=10) == []
+    assert sample_column([], n=10) == []
+    assert sample_column([None, "", "null", float("nan")], n=10) == []
+
+
+def test_sample_column_huge():
+    huge_vals = list(range(50000))
+    sampled = sample_column(huge_vals, n=100, random_state=42)
+    assert len(sampled) == 100
+    assert len(set(sampled)) == 100
+
+
+def test_sample_column_mixed_types():
+    mixed = [1, "two", 3.14, True, None, "2023-01-01", False]
+    sampled = sample_column(mixed, n=10, random_state=42)
+    # Booleans (True, False) and numbers are valid non-nulls; None is filtered
+    assert None not in sampled
+    assert 1 in sampled
+    assert "two" in sampled
+    assert 3.14 in sampled
+    assert True in sampled
+    assert False in sampled
+
+
+def test_sample_column_deterministic_seed():
+    vals = list(range(1000))
+    s1 = sample_column(vals, n=50, random_state=123)
+    s2 = sample_column(vals, n=50, random_state=123)
+    s3 = sample_column(vals, n=50, random_state=999)
+    assert s1 == s2
+    assert s1 != s3
 
 
 def test_load_csv_column():

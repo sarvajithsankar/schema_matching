@@ -1,7 +1,8 @@
 """Unit tests for evaluation.metrics."""
 
 import pytest
-from evaluation.metrics import compute_metrics
+from evaluation.metrics import compute_metrics, compute_macro_metrics
+from matching.matcher import SchemaMatch
 
 
 def test_compute_metrics_perfect():
@@ -48,8 +49,51 @@ def test_compute_metrics_partial_manual():
     assert metrics["f1"] == pytest.approx(0.4000, abs=1e-4)
 
 
-def test_compute_metrics_empty():
-    metrics = compute_metrics([], [])
-    assert metrics["precision"] == 0.0
-    assert metrics["recall"] == 0.0
-    assert metrics["f1"] == 0.0
+def test_compute_metrics_zero_division():
+    # Empty predictions and empty ground truth
+    m0 = compute_metrics([], [])
+    assert m0["precision"] == 0.0
+    assert m0["recall"] == 0.0
+    assert m0["f1"] == 0.0
+
+    # Predictions made but ground truth is empty (all FP)
+    m_no_gt = compute_metrics([("A", "B")], [])
+    assert m_no_gt["precision"] == 0.0
+    assert m_no_gt["recall"] == 0.0
+    assert m_no_gt["f1"] == 0.0
+
+    # Ground truth exists but no predictions (all FN)
+    m_no_pred = compute_metrics([], [("A", "B")])
+    assert m_no_pred["precision"] == 0.0
+    assert m_no_pred["recall"] == 0.0
+    assert m_no_pred["f1"] == 0.0
+
+
+def test_compute_metrics_with_schema_matches():
+    matches = [
+        SchemaMatch("A.id", "B.id", 0.95, accepted=True),
+        SchemaMatch("A.extra", "B.wrong", 0.80, accepted=True),
+    ]
+    gt = [("A.id", "B.id"), ("A.name", "B.name")]
+
+    metrics = compute_metrics(matches, gt)
+    assert metrics["tp"] == 1
+    assert metrics["fp"] == 1
+    assert metrics["fn"] == 1
+    assert metrics["precision"] == 0.5
+    assert metrics["recall"] == 0.5
+    assert metrics["f1"] == 0.5
+
+
+def test_compute_macro_metrics():
+    list_of_metrics = [
+        {"precision": 1.0, "recall": 1.0, "f1": 1.0},
+        {"precision": 0.5, "recall": 0.5, "f1": 0.5},
+    ]
+    macro = compute_macro_metrics(list_of_metrics)
+    assert macro["mean_precision"] == 0.75
+    assert macro["mean_recall"] == 0.75
+    assert macro["mean_f1"] == 0.75
+
+    empty_macro = compute_macro_metrics([])
+    assert empty_macro["mean_f1"] == 0.0
