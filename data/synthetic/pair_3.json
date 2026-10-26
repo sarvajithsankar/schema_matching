@@ -4,22 +4,15 @@
   "profiles_a": [
     {
       "column_id": "DB1.Profiles.age",
-      "raw_name": "age",
+      "schema_name": "DB1",
       "normalized_tokens": [
         "age"
       ],
-      "value_sample": [
-        25.0,
-        34.0,
-        42.0,
-        19.0,
-        58.0
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "numeric",
+        "inferred_type": "int",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.95,
         "length_stats": null,
         "numeric_stats": {
           "mean": 35.6,
@@ -34,28 +27,39 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": true
+          "looks_like_date_string": true,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        25.0,
+        34.0,
+        42.0,
+        19.0,
+        58.0
+      ],
+      "name_embedding": [],
+      "raw_name": "age",
+      "data_type": "numeric",
+      "sample_values": [
+        25.0,
+        34.0,
+        42.0,
+        19.0,
+        58.0
+      ]
     },
     {
       "column_id": "DB1.Profiles.status",
-      "raw_name": "status",
+      "schema_name": "DB1",
       "normalized_tokens": [
         "status"
       ],
-      "value_sample": [
-        "ACTIVE",
-        "ACTIVE",
-        "PENDING",
-        "ACTIVE",
-        "INACTIVE"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "string",
-        "cardinality_ratio": 0.6,
-        "null_ratio": 0.0,
+        "inferred_type": "string",
+        "cardinality_ratio": 0.06,
+        "null_ratio": 0.5,
         "length_stats": {
           "min": 6,
           "max": 8,
@@ -66,28 +70,129 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE"
+      ],
+      "name_embedding": [],
+      "raw_name": "status",
+      "data_type": "string",
+      "sample_values": [
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "PENDING",
+        "ACTIVE",
+        "INACTIVE"
+      ]
     },
     {
       "column_id": "DB1.Profiles.score",
-      "raw_name": "score",
+      "schema_name": "DB1",
       "normalized_tokens": [
         "score"
       ],
-      "value_sample": [
-        88.5,
-        92.0,
-        79.0,
-        95.5,
-        84.0
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "numeric",
+        "inferred_type": "float",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.95,
         "length_stats": null,
         "numeric_stats": {
           "mean": 87.8,
@@ -102,19 +207,52 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": true
+          "looks_like_date_string": true,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        88.5,
+        92.0,
+        79.0,
+        95.5,
+        84.0
+      ],
+      "name_embedding": [],
+      "raw_name": "score",
+      "data_type": "numeric",
+      "sample_values": [
+        88.5,
+        92.0,
+        79.0,
+        95.5,
+        84.0
+      ]
     }
   ],
   "profiles_b": [
     {
       "column_id": "DB2.Records.age",
-      "raw_name": "age",
+      "schema_name": "DB2",
       "normalized_tokens": [
         "age"
       ],
-      "value_sample": [
+      "value_profile": {
+        "dtype": "date",
+        "inferred_type": "date",
+        "cardinality_ratio": 1.0,
+        "null_ratio": 0.95,
+        "length_stats": null,
+        "numeric_stats": null,
+        "pattern_flags": {
+          "looks_like_email": false,
+          "looks_like_phone": false,
+          "looks_like_id_code": false,
+          "looks_like_date_string": true,
+          "looks_like_url": false
+        }
+      },
+      "sampled_values": [
         "1999-01-15",
         "1990-08-22",
         "1982-12-05",
@@ -122,38 +260,27 @@
         "1966-07-19"
       ],
       "name_embedding": [],
-      "value_profile": {
-        "dtype": "date",
-        "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
-        "length_stats": null,
-        "numeric_stats": null,
-        "pattern_flags": {
-          "looks_like_email": false,
-          "looks_like_phone": false,
-          "looks_like_id_code": false,
-          "looks_like_date_string": true
-        }
-      }
+      "raw_name": "age",
+      "data_type": "date",
+      "sample_values": [
+        "1999-01-15",
+        "1990-08-22",
+        "1982-12-05",
+        "2005-03-10",
+        "1966-07-19"
+      ]
     },
     {
       "column_id": "DB2.Records.status",
-      "raw_name": "status",
+      "schema_name": "DB2",
       "normalized_tokens": [
         "status"
       ],
-      "value_sample": [
-        100.0,
-        100.0,
-        200.0,
-        100.0,
-        300.0
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "numeric",
+        "inferred_type": "int",
         "cardinality_ratio": 0.6,
-        "null_ratio": 0.0,
+        "null_ratio": 0.95,
         "length_stats": null,
         "numeric_stats": {
           "mean": 160.0,
@@ -168,28 +295,39 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": true
+          "looks_like_date_string": true,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        100.0,
+        100.0,
+        200.0,
+        100.0,
+        300.0
+      ],
+      "name_embedding": [],
+      "raw_name": "status",
+      "data_type": "numeric",
+      "sample_values": [
+        100.0,
+        100.0,
+        200.0,
+        100.0,
+        300.0
+      ]
     },
     {
       "column_id": "DB2.Records.score",
-      "raw_name": "score",
+      "schema_name": "DB2",
       "normalized_tokens": [
         "score"
       ],
-      "value_sample": [
-        88.5,
-        92.0,
-        79.0,
-        95.5,
-        84.0
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "numeric",
+        "inferred_type": "float",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.95,
         "length_stats": null,
         "numeric_stats": {
           "mean": 87.8,
@@ -204,9 +342,27 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": true
+          "looks_like_date_string": true,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        88.5,
+        92.0,
+        79.0,
+        95.5,
+        84.0
+      ],
+      "name_embedding": [],
+      "raw_name": "score",
+      "data_type": "numeric",
+      "sample_values": [
+        88.5,
+        92.0,
+        79.0,
+        95.5,
+        84.0
+      ]
     }
   ],
   "ground_truth": [

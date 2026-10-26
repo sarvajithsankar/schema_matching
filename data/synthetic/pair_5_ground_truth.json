@@ -1,0 +1,34 @@
+[
+  [
+    "CRM.Customer.cust_id",
+    "Billing.Client.client_code"
+  ],
+  [
+    "CRM.Customer.fname",
+    "Billing.Client.first_name"
+  ],
+  [
+    "CRM.Customer.lname",
+    "Billing.Client.last_name"
+  ],
+  [
+    "CRM.Customer.email_addr",
+    "Billing.Client.contact_email"
+  ],
+  [
+    "CRM.Customer.phone_num",
+    "Billing.Client.telephone"
+  ],
+  [
+    "CRM.Customer.created_at",
+    "Billing.Client.signup_date"
+  ],
+  [
+    "CRM.Customer.credit_rating",
+    "Billing.Client.credit_score"
+  ],
+  [
+    "CRM.Customer.active_flag",
+    "Billing.Client.is_active"
+  ]
+]

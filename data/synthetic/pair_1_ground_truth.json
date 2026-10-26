@@ -1,0 +1,18 @@
+[
+  [
+    "DB1.Users.id",
+    "DB2.Users.id"
+  ],
+  [
+    "DB1.Users.name",
+    "DB2.Users.name"
+  ],
+  [
+    "DB1.Users.email",
+    "DB2.Users.email"
+  ],
+  [
+    "DB1.Users.balance",
+    "DB2.Users.balance"
+  ]
+]

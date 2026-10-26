@@ -1,0 +1,18 @@
+[
+  [
+    "Source.Orders.ref_num",
+    "Target.Invoices.identifier"
+  ],
+  [
+    "Source.Orders.contact_phone",
+    "Target.Invoices.telephone"
+  ],
+  [
+    "Source.Orders.placed_on",
+    "Target.Invoices.invoice_date"
+  ],
+  [
+    "Source.Orders.total_due",
+    "Target.Invoices.amount_charged"
+  ]
+]

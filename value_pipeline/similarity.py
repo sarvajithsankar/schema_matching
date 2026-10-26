@@ -1,9 +1,12 @@
 """
-Value similarity metrics for comparing column value profiles.
-Supports weighted Euclidean distance and Jensen-Shannon Divergence (JSD).
+Stage 4: Value similarity metrics for comparing column value profiles.
+Supports weighted Euclidean distance, profile vector cosine similarity,
+and Jensen-Shannon Divergence (JSD) distribution comparison.
+All similarity metrics return values in [0.0, 1.0], are symmetric, deterministic,
+and penalize data type mismatches.
 """
 
-from typing import Dict, Optional, Tuple
+from typing import Any, Dict, Optional, Tuple
 import numpy as np
 from scipy.spatial.distance import jensenshannon
 from scipy.special import softmax
@@ -11,7 +14,7 @@ from scipy.special import softmax
 from value_pipeline.profiler import profile_to_vector
 
 # Dimension weights corresponding to 22-dimensional profile vector:
-# - Dims 0..4: dtype one-hot (weight 2.0)
+# - Dims 0..4: dtype one-hot (weight 2.0 to strongly penalize dtype mismatch)
 # - Dims 5..17: ratios, length stats, numeric stats (weight 1.0)
 # - Dims 18..21: pattern flags (weight 1.5)
 FEATURE_WEIGHTS = np.array(
@@ -26,6 +29,9 @@ def weighted_euclidean_distance(profile_a: dict, profile_b: dict) -> float:
     """
     Computes weighted Euclidean distance between two profile vectors:
     dist = sqrt( sum( w_i * (v_a[i] - v_b[i])^2 ) )
+
+    Symmetric: dist(a, b) == dist(b, a).
+    Deterministic and handles zero vectors safely.
     """
     vec_a = np.array(profile_to_vector(profile_a), dtype=np.float64)
     vec_b = np.array(profile_to_vector(profile_b), dtype=np.float64)
@@ -35,13 +41,38 @@ def weighted_euclidean_distance(profile_a: dict, profile_b: dict) -> float:
     return float(np.sqrt(np.sum(weighted_diff)))
 
 
+def profile_cosine_similarity(profile_a: dict, profile_b: dict) -> float:
+    """
+    Computes cosine similarity between two 22-dimensional profile vectors,
+    scaled to [0.0, 1.0].
+    Handles zero vectors safely (returns 1.0 if both zero, 0.0 if one is zero).
+    """
+    vec_a = np.array(profile_to_vector(profile_a), dtype=np.float64)
+    vec_b = np.array(profile_to_vector(profile_b), dtype=np.float64)
+
+    norm_a = float(np.linalg.norm(vec_a))
+    norm_b = float(np.linalg.norm(vec_b))
+
+    if norm_a == 0.0 and norm_b == 0.0:
+        return 1.0
+    if norm_a == 0.0 or norm_b == 0.0:
+        return 0.0
+
+    dot = float(np.dot(vec_a, vec_b))
+    cosine_val = dot / (norm_a * norm_b)
+    # Map from [-1.0, 1.0] to [0.0, 1.0]
+    scaled = (cosine_val + 1.0) / 2.0
+    return float(np.clip(scaled, 0.0, 1.0))
+
+
 def value_similarity(profile_a: dict, profile_b: dict) -> float:
     """
     Returns a similarity score in [0.0, 1.0] between two value_profile dicts.
 
-    1. Vectorizes both profiles via profile_to_vector.
-    2. Computes weighted Euclidean distance.
+    1. Vectorizes both profiles via profile_to_vector (22 dims).
+    2. Computes weighted Euclidean distance (penalizing dtype mismatch).
     3. Transforms distance to similarity: sim = 1.0 / (1.0 + distance).
+    4. Guarantees symmetry: value_similarity(a, b) == value_similarity(b, a).
     """
     dist = weighted_euclidean_distance(profile_a, profile_b)
     sim = 1.0 / (1.0 + dist)
@@ -58,7 +89,7 @@ def value_similarity_jsd(profile_a: dict, profile_b: dict) -> float:
     dtype_a = profile_a.get("dtype")
     dtype_b = profile_b.get("dtype")
 
-    if dtype_a == "numeric" and dtype_b == "numeric":
+    if dtype_a in ("numeric", "int", "float") and dtype_b in ("numeric", "int", "float"):
         stats_a = profile_a.get("numeric_stats")
         stats_b = profile_b.get("numeric_stats")
 

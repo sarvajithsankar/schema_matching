@@ -1,0 +1,25 @@
+Scenario,Description,Matcher,Precision,Recall,F1,TP,FP,FN
+pair_1,"Exact name match, same values (sanity check)",1. Name-Only Baseline,1.0,1.0,1.0,4,0,0
+pair_1,"Exact name match, same values (sanity check)",2. Value-Only Baseline,1.0,1.0,1.0,4,0,0
+pair_1,"Exact name match, same values (sanity check)",3. Fixed-Fusion (alpha=0.5),1.0,1.0,1.0,4,0,0
+pair_1,"Exact name match, same values (sanity check)",4. Adaptive Fusion,1.0,1.0,1.0,4,0,0
+pair_2,"Renamed columns, same value distribution (tests value signal)",1. Name-Only Baseline,0.0,0.0,0.0,0,0,4
+pair_2,"Renamed columns, same value distribution (tests value signal)",2. Value-Only Baseline,1.0,1.0,1.0,4,0,0
+pair_2,"Renamed columns, same value distribution (tests value signal)",3. Fixed-Fusion (alpha=0.5),1.0,1.0,1.0,4,0,0
+pair_2,"Renamed columns, same value distribution (tests value signal)",4. Adaptive Fusion,1.0,1.0,1.0,4,0,0
+pair_3,"Similar names, different value types (tests dtype penalty)",1. Name-Only Baseline,0.3333,1.0,0.5,1,2,0
+pair_3,"Similar names, different value types (tests dtype penalty)",2. Value-Only Baseline,0.5,1.0,0.6667,1,1,0
+pair_3,"Similar names, different value types (tests dtype penalty)",3. Fixed-Fusion (alpha=0.5),0.3333,1.0,0.5,1,2,0
+pair_3,"Similar names, different value types (tests dtype penalty)",4. Adaptive Fusion,0.3333,1.0,0.5,1,2,0
+pair_4,"Mixed: exact matches, renamed columns, and unmatchable column",1. Name-Only Baseline,1.0,0.3333,0.5,1,0,2
+pair_4,"Mixed: exact matches, renamed columns, and unmatchable column",2. Value-Only Baseline,1.0,1.0,1.0,3,0,0
+pair_4,"Mixed: exact matches, renamed columns, and unmatchable column",3. Fixed-Fusion (alpha=0.5),1.0,1.0,1.0,3,0,0
+pair_4,"Mixed: exact matches, renamed columns, and unmatchable column",4. Adaptive Fusion,1.0,1.0,1.0,3,0,0
+pair_5,Real-world flavored: Customer vs Client tables (8 columns each),1. Name-Only Baseline,1.0,0.625,0.7692,5,0,3
+pair_5,Real-world flavored: Customer vs Client tables (8 columns each),2. Value-Only Baseline,1.0,1.0,1.0,8,0,0
+pair_5,Real-world flavored: Customer vs Client tables (8 columns each),3. Fixed-Fusion (alpha=0.5),1.0,1.0,1.0,8,0,0
+pair_5,Real-world flavored: Customer vs Client tables (8 columns each),4. Adaptive Fusion,1.0,1.0,1.0,8,0,0
+OVERALL_MEAN,Macro average across all pairs,1. Name-Only Baseline,0.6667,0.5917,0.5538,,,
+OVERALL_MEAN,Macro average across all pairs,2. Value-Only Baseline,0.9,1.0,0.9333,,,
+OVERALL_MEAN,Macro average across all pairs,3. Fixed-Fusion (alpha=0.5),0.8667,1.0,0.9,,,
+OVERALL_MEAN,Macro average across all pairs,4. Adaptive Fusion,0.8667,1.0,0.9,,,

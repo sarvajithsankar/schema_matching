@@ -4,21 +4,15 @@
   "profiles_a": [
     {
       "column_id": "App1.Items.sku",
-      "raw_name": "sku",
+      "schema_name": "App1",
       "normalized_tokens": [
         "sku"
       ],
-      "value_sample": [
-        "SKU-001",
-        "SKU-002",
-        "SKU-003",
-        "SKU-004"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "id_code",
+        "inferred_type": "id_code",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.96,
         "length_stats": {
           "min": 7,
           "max": 7,
@@ -29,27 +23,37 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": true,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "SKU-001",
+        "SKU-002",
+        "SKU-003",
+        "SKU-004"
+      ],
+      "name_embedding": [],
+      "raw_name": "sku",
+      "data_type": "id_code",
+      "sample_values": [
+        "SKU-001",
+        "SKU-002",
+        "SKU-003",
+        "SKU-004"
+      ]
     },
     {
       "column_id": "App1.Items.name",
-      "raw_name": "name",
+      "schema_name": "App1",
       "normalized_tokens": [
         "name"
       ],
-      "value_sample": [
-        "Widget A",
-        "Gadget B",
-        "Tool C",
-        "Device D"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "string",
+        "inferred_type": "string",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.96,
         "length_stats": {
           "min": 6,
           "max": 8,
@@ -60,27 +64,37 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "Widget A",
+        "Gadget B",
+        "Tool C",
+        "Device D"
+      ],
+      "name_embedding": [],
+      "raw_name": "name",
+      "data_type": "string",
+      "sample_values": [
+        "Widget A",
+        "Gadget B",
+        "Tool C",
+        "Device D"
+      ]
     },
     {
       "column_id": "App1.Items.price",
-      "raw_name": "price",
+      "schema_name": "App1",
       "normalized_tokens": [
         "price"
       ],
-      "value_sample": [
-        19.99,
-        49.5,
-        5.0,
-        120.0
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "numeric",
+        "inferred_type": "float",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.96,
         "length_stats": null,
         "numeric_stats": {
           "mean": 48.6225,
@@ -95,28 +109,38 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": true
+          "looks_like_date_string": true,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        19.99,
+        49.5,
+        5.0,
+        120.0
+      ],
+      "name_embedding": [],
+      "raw_name": "price",
+      "data_type": "numeric",
+      "sample_values": [
+        19.99,
+        49.5,
+        5.0,
+        120.0
+      ]
     },
     {
       "column_id": "App1.Items.internal_warehouse_bin",
-      "raw_name": "internal_bin",
+      "schema_name": "App1",
       "normalized_tokens": [
         "internal",
         "bin"
       ],
-      "value_sample": [
-        "BIN-NORTH-01",
-        "BIN-SOUTH-02",
-        "BIN-EAST-03",
-        "BIN-WEST-04"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "id_code",
+        "inferred_type": "id_code",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.96,
         "length_stats": {
           "min": 11,
           "max": 12,
@@ -127,30 +151,40 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": true,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "BIN-NORTH-01",
+        "BIN-SOUTH-02",
+        "BIN-EAST-03",
+        "BIN-WEST-04"
+      ],
+      "name_embedding": [],
+      "raw_name": "internal_bin",
+      "data_type": "id_code",
+      "sample_values": [
+        "BIN-NORTH-01",
+        "BIN-SOUTH-02",
+        "BIN-EAST-03",
+        "BIN-WEST-04"
+      ]
     }
   ],
   "profiles_b": [
     {
       "column_id": "App2.Catalog.product_code",
-      "raw_name": "product_code",
+      "schema_name": "App2",
       "normalized_tokens": [
         "product",
         "code"
       ],
-      "value_sample": [
-        "SKU-001",
-        "SKU-002",
-        "SKU-003",
-        "SKU-004"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "id_code",
+        "inferred_type": "id_code",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.96,
         "length_stats": {
           "min": 7,
           "max": 7,
@@ -161,27 +195,37 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": true,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "SKU-001",
+        "SKU-002",
+        "SKU-003",
+        "SKU-004"
+      ],
+      "name_embedding": [],
+      "raw_name": "product_code",
+      "data_type": "id_code",
+      "sample_values": [
+        "SKU-001",
+        "SKU-002",
+        "SKU-003",
+        "SKU-004"
+      ]
     },
     {
       "column_id": "App2.Catalog.name",
-      "raw_name": "name",
+      "schema_name": "App2",
       "normalized_tokens": [
         "name"
       ],
-      "value_sample": [
-        "Widget A",
-        "Gadget B",
-        "Tool C",
-        "Device D"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "string",
+        "inferred_type": "string",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.96,
         "length_stats": {
           "min": 6,
           "max": 8,
@@ -192,27 +236,37 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "Widget A",
+        "Gadget B",
+        "Tool C",
+        "Device D"
+      ],
+      "name_embedding": [],
+      "raw_name": "name",
+      "data_type": "string",
+      "sample_values": [
+        "Widget A",
+        "Gadget B",
+        "Tool C",
+        "Device D"
+      ]
     },
     {
       "column_id": "App2.Catalog.cost",
-      "raw_name": "cost",
+      "schema_name": "App2",
       "normalized_tokens": [
         "cost"
       ],
-      "value_sample": [
-        19.99,
-        49.5,
-        5.0,
-        120.0
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "numeric",
+        "inferred_type": "float",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.96,
         "length_stats": null,
         "numeric_stats": {
           "mean": 48.6225,
@@ -227,27 +281,37 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": true
+          "looks_like_date_string": true,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        19.99,
+        49.5,
+        5.0,
+        120.0
+      ],
+      "name_embedding": [],
+      "raw_name": "cost",
+      "data_type": "numeric",
+      "sample_values": [
+        19.99,
+        49.5,
+        5.0,
+        120.0
+      ]
     },
     {
       "column_id": "App2.Catalog.supplier_notes",
-      "raw_name": "notes",
+      "schema_name": "App2",
       "normalized_tokens": [
         "notes"
       ],
-      "value_sample": [
-        "Local vendor",
-        "Bulk supplier",
-        "Direct order",
-        "Overseas"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "string",
+        "inferred_type": "string",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.96,
         "length_stats": {
           "min": 8,
           "max": 13,
@@ -258,9 +322,25 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "Local vendor",
+        "Bulk supplier",
+        "Direct order",
+        "Overseas"
+      ],
+      "name_embedding": [],
+      "raw_name": "notes",
+      "data_type": "string",
+      "sample_values": [
+        "Local vendor",
+        "Bulk supplier",
+        "Direct order",
+        "Overseas"
+      ]
     }
   ],
   "ground_truth": [

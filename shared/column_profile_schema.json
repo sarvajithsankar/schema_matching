@@ -4,39 +4,52 @@
   "type": "object",
   "required": [
     "column_id",
-    "raw_name",
+    "schema_name",
     "normalized_tokens",
-    "data_type",
-    "sample_values",
-    "name_embedding"
+    "value_profile"
   ],
   "properties": {
     "column_id": {
-      "type": "string"
+      "type": "string",
+      "description": "Unique identifier for the column across schemas"
+    },
+    "schema_name": {
+      "type": "string",
+      "description": "Name of the source schema or table"
     },
     "raw_name": {
-      "type": "string"
+      "type": "string",
+      "description": "Original raw column name"
     },
     "normalized_tokens": {
       "type": "array",
       "items": {
         "type": "string"
-      }
+      },
+      "description": "Normalized and expanded tokens from the column name"
     },
     "data_type": {
-      "type": "string"
+      "type": "string",
+      "description": "Inferred data type"
+    },
+    "sampled_values": {
+      "type": "array",
+      "description": "Sample of non-null column values"
     },
     "sample_values": {
-      "type": "array"
+      "type": "array",
+      "description": "Alias for sampled_values"
     },
     "name_embedding": {
-      "type": "array",
+      "type": ["array", "null"],
       "items": {
         "type": "number"
-      }
+      },
+      "description": "Optional dense semantic embedding of the column name"
     },
     "value_profile": {
-      "type": "object"
+      "type": "object",
+      "description": "Statistical summary and feature profile dictionary"
     }
   }
 }

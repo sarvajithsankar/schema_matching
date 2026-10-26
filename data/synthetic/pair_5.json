@@ -4,24 +4,16 @@
   "profiles_a": [
     {
       "column_id": "CRM.Customer.cust_id",
-      "raw_name": "cust_id",
+      "schema_name": "CRM",
       "normalized_tokens": [
         "customer",
         "id"
       ],
-      "value_sample": [
-        "CUST-001",
-        "CUST-002",
-        "CUST-003",
-        "CUST-004",
-        "CUST-005",
-        "CUST-006"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "id_code",
+        "inferred_type": "id_code",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.94,
         "length_stats": {
           "min": 8,
           "max": 8,
@@ -32,30 +24,42 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": true,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "CUST-001",
+        "CUST-002",
+        "CUST-003",
+        "CUST-004",
+        "CUST-005",
+        "CUST-006"
+      ],
+      "name_embedding": [],
+      "raw_name": "cust_id",
+      "data_type": "id_code",
+      "sample_values": [
+        "CUST-001",
+        "CUST-002",
+        "CUST-003",
+        "CUST-004",
+        "CUST-005",
+        "CUST-006"
+      ]
     },
     {
       "column_id": "CRM.Customer.fname",
-      "raw_name": "fname",
+      "schema_name": "CRM",
       "normalized_tokens": [
         "first",
         "name"
       ],
-      "value_sample": [
-        "James",
-        "Mary",
-        "Robert",
-        "Patricia",
-        "John",
-        "Jennifer"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "string",
+        "inferred_type": "string",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.94,
         "length_stats": {
           "min": 4,
           "max": 8,
@@ -66,30 +70,42 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "James",
+        "Mary",
+        "Robert",
+        "Patricia",
+        "John",
+        "Jennifer"
+      ],
+      "name_embedding": [],
+      "raw_name": "fname",
+      "data_type": "string",
+      "sample_values": [
+        "James",
+        "Mary",
+        "Robert",
+        "Patricia",
+        "John",
+        "Jennifer"
+      ]
     },
     {
       "column_id": "CRM.Customer.lname",
-      "raw_name": "lname",
+      "schema_name": "CRM",
       "normalized_tokens": [
         "last",
         "name"
       ],
-      "value_sample": [
-        "Smith",
-        "Johnson",
-        "Williams",
-        "Brown",
-        "Jones",
-        "Garcia"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "string",
+        "inferred_type": "string",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.94,
         "length_stats": {
           "min": 5,
           "max": 8,
@@ -100,30 +116,42 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "Smith",
+        "Johnson",
+        "Williams",
+        "Brown",
+        "Jones",
+        "Garcia"
+      ],
+      "name_embedding": [],
+      "raw_name": "lname",
+      "data_type": "string",
+      "sample_values": [
+        "Smith",
+        "Johnson",
+        "Williams",
+        "Brown",
+        "Jones",
+        "Garcia"
+      ]
     },
     {
       "column_id": "CRM.Customer.email_addr",
-      "raw_name": "email_addr",
+      "schema_name": "CRM",
       "normalized_tokens": [
         "email",
         "address"
       ],
-      "value_sample": [
-        "james.s@gmail.com",
-        "mary.j@yahoo.com",
-        "rob.w@corp.com",
-        "pat.b@outlook.com",
-        "john.j@mail.com",
-        "jen.g@web.de"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "string",
+        "inferred_type": "string",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.94,
         "length_stats": {
           "min": 12,
           "max": 17,
@@ -134,30 +162,42 @@
           "looks_like_email": true,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "james.s@gmail.com",
+        "mary.j@yahoo.com",
+        "rob.w@corp.com",
+        "pat.b@outlook.com",
+        "john.j@mail.com",
+        "jen.g@web.de"
+      ],
+      "name_embedding": [],
+      "raw_name": "email_addr",
+      "data_type": "string",
+      "sample_values": [
+        "james.s@gmail.com",
+        "mary.j@yahoo.com",
+        "rob.w@corp.com",
+        "pat.b@outlook.com",
+        "john.j@mail.com",
+        "jen.g@web.de"
+      ]
     },
     {
       "column_id": "CRM.Customer.phone_num",
-      "raw_name": "phone_num",
+      "schema_name": "CRM",
       "normalized_tokens": [
         "phone",
         "number"
       ],
-      "value_sample": [
-        "(555) 234-5678",
-        "(555) 345-6789",
-        "(555) 456-7890",
-        "(555) 567-8901",
-        "(555) 678-9012",
-        "(555) 789-0123"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "string",
+        "inferred_type": "string",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.94,
         "length_stats": {
           "min": 14,
           "max": 14,
@@ -168,18 +208,53 @@
           "looks_like_email": false,
           "looks_like_phone": true,
           "looks_like_id_code": false,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "(555) 234-5678",
+        "(555) 345-6789",
+        "(555) 456-7890",
+        "(555) 567-8901",
+        "(555) 678-9012",
+        "(555) 789-0123"
+      ],
+      "name_embedding": [],
+      "raw_name": "phone_num",
+      "data_type": "string",
+      "sample_values": [
+        "(555) 234-5678",
+        "(555) 345-6789",
+        "(555) 456-7890",
+        "(555) 567-8901",
+        "(555) 678-9012",
+        "(555) 789-0123"
+      ]
     },
     {
       "column_id": "CRM.Customer.created_at",
-      "raw_name": "created_at",
+      "schema_name": "CRM",
       "normalized_tokens": [
         "created",
         "at"
       ],
-      "value_sample": [
+      "value_profile": {
+        "dtype": "date",
+        "inferred_type": "date",
+        "cardinality_ratio": 1.0,
+        "null_ratio": 0.94,
+        "length_stats": null,
+        "numeric_stats": null,
+        "pattern_flags": {
+          "looks_like_email": false,
+          "looks_like_phone": false,
+          "looks_like_id_code": false,
+          "looks_like_date_string": true,
+          "looks_like_url": false
+        }
+      },
+      "sampled_values": [
         "2021-04-12",
         "2021-08-19",
         "2022-01-05",
@@ -188,40 +263,29 @@
         "2023-10-09"
       ],
       "name_embedding": [],
-      "value_profile": {
-        "dtype": "date",
-        "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
-        "length_stats": null,
-        "numeric_stats": null,
-        "pattern_flags": {
-          "looks_like_email": false,
-          "looks_like_phone": false,
-          "looks_like_id_code": false,
-          "looks_like_date_string": true
-        }
-      }
+      "raw_name": "created_at",
+      "data_type": "date",
+      "sample_values": [
+        "2021-04-12",
+        "2021-08-19",
+        "2022-01-05",
+        "2022-06-23",
+        "2023-02-14",
+        "2023-10-09"
+      ]
     },
     {
       "column_id": "CRM.Customer.credit_rating",
-      "raw_name": "credit_rating",
+      "schema_name": "CRM",
       "normalized_tokens": [
         "credit",
         "rating"
       ],
-      "value_sample": [
-        720.0,
-        685.0,
-        750.0,
-        610.0,
-        805.0,
-        690.0
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "numeric",
+        "inferred_type": "int",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.94,
         "length_stats": null,
         "numeric_stats": {
           "mean": 710.0,
@@ -236,66 +300,198 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": true
+          "looks_like_date_string": true,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        720.0,
+        685.0,
+        750.0,
+        610.0,
+        805.0,
+        690.0
+      ],
+      "name_embedding": [],
+      "raw_name": "credit_rating",
+      "data_type": "numeric",
+      "sample_values": [
+        720.0,
+        685.0,
+        750.0,
+        610.0,
+        805.0,
+        690.0
+      ]
     },
     {
       "column_id": "CRM.Customer.active_flag",
-      "raw_name": "active_flag",
+      "schema_name": "CRM",
       "normalized_tokens": [
         "active",
         "flag"
       ],
-      "value_sample": [
-        "true",
-        "true",
-        "false",
-        "true",
-        "true",
-        "false"
-      ],
-      "name_embedding": [],
       "value_profile": {
-        "dtype": "string",
-        "cardinality_ratio": 0.3333,
-        "null_ratio": 0.0,
+        "dtype": "categorical",
+        "inferred_type": "categorical",
+        "cardinality_ratio": 0.0333,
+        "null_ratio": 0.4,
         "length_stats": {
-          "min": 4,
-          "max": 5,
-          "mean": 4.333333333333333
+          "min": 6,
+          "max": 8,
+          "mean": 6.666666666666667
         },
         "numeric_stats": null,
         "pattern_flags": {
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE"
+      ],
+      "name_embedding": [],
+      "raw_name": "active_flag",
+      "data_type": "categorical",
+      "sample_values": [
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE"
+      ]
     }
   ],
   "profiles_b": [
     {
       "column_id": "Billing.Client.client_code",
-      "raw_name": "client_code",
+      "schema_name": "Billing",
       "normalized_tokens": [
         "client",
         "code"
       ],
-      "value_sample": [
-        "CUST-001",
-        "CUST-002",
-        "CUST-003",
-        "CUST-004",
-        "CUST-005",
-        "CUST-006"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "id_code",
+        "inferred_type": "id_code",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.94,
         "length_stats": {
           "min": 8,
           "max": 8,
@@ -306,30 +502,42 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": true,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "CUST-001",
+        "CUST-002",
+        "CUST-003",
+        "CUST-004",
+        "CUST-005",
+        "CUST-006"
+      ],
+      "name_embedding": [],
+      "raw_name": "client_code",
+      "data_type": "id_code",
+      "sample_values": [
+        "CUST-001",
+        "CUST-002",
+        "CUST-003",
+        "CUST-004",
+        "CUST-005",
+        "CUST-006"
+      ]
     },
     {
       "column_id": "Billing.Client.first_name",
-      "raw_name": "first_name",
+      "schema_name": "Billing",
       "normalized_tokens": [
         "first",
         "name"
       ],
-      "value_sample": [
-        "James",
-        "Mary",
-        "Robert",
-        "Patricia",
-        "John",
-        "Jennifer"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "string",
+        "inferred_type": "string",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.94,
         "length_stats": {
           "min": 4,
           "max": 8,
@@ -340,30 +548,42 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "James",
+        "Mary",
+        "Robert",
+        "Patricia",
+        "John",
+        "Jennifer"
+      ],
+      "name_embedding": [],
+      "raw_name": "first_name",
+      "data_type": "string",
+      "sample_values": [
+        "James",
+        "Mary",
+        "Robert",
+        "Patricia",
+        "John",
+        "Jennifer"
+      ]
     },
     {
       "column_id": "Billing.Client.last_name",
-      "raw_name": "last_name",
+      "schema_name": "Billing",
       "normalized_tokens": [
         "last",
         "name"
       ],
-      "value_sample": [
-        "Smith",
-        "Johnson",
-        "Williams",
-        "Brown",
-        "Jones",
-        "Garcia"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "string",
+        "inferred_type": "string",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.94,
         "length_stats": {
           "min": 5,
           "max": 8,
@@ -374,30 +594,42 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "Smith",
+        "Johnson",
+        "Williams",
+        "Brown",
+        "Jones",
+        "Garcia"
+      ],
+      "name_embedding": [],
+      "raw_name": "last_name",
+      "data_type": "string",
+      "sample_values": [
+        "Smith",
+        "Johnson",
+        "Williams",
+        "Brown",
+        "Jones",
+        "Garcia"
+      ]
     },
     {
       "column_id": "Billing.Client.contact_email",
-      "raw_name": "contact_email",
+      "schema_name": "Billing",
       "normalized_tokens": [
         "contact",
         "email"
       ],
-      "value_sample": [
-        "james.s@gmail.com",
-        "mary.j@yahoo.com",
-        "rob.w@corp.com",
-        "pat.b@outlook.com",
-        "john.j@mail.com",
-        "jen.g@web.de"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "string",
+        "inferred_type": "string",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.94,
         "length_stats": {
           "min": 12,
           "max": 17,
@@ -408,29 +640,41 @@
           "looks_like_email": true,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "james.s@gmail.com",
+        "mary.j@yahoo.com",
+        "rob.w@corp.com",
+        "pat.b@outlook.com",
+        "john.j@mail.com",
+        "jen.g@web.de"
+      ],
+      "name_embedding": [],
+      "raw_name": "contact_email",
+      "data_type": "string",
+      "sample_values": [
+        "james.s@gmail.com",
+        "mary.j@yahoo.com",
+        "rob.w@corp.com",
+        "pat.b@outlook.com",
+        "john.j@mail.com",
+        "jen.g@web.de"
+      ]
     },
     {
       "column_id": "Billing.Client.telephone",
-      "raw_name": "telephone",
+      "schema_name": "Billing",
       "normalized_tokens": [
         "telephone"
       ],
-      "value_sample": [
-        "(555) 234-5678",
-        "(555) 345-6789",
-        "(555) 456-7890",
-        "(555) 567-8901",
-        "(555) 678-9012",
-        "(555) 789-0123"
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "string",
+        "inferred_type": "string",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.94,
         "length_stats": {
           "min": 14,
           "max": 14,
@@ -441,18 +685,53 @@
           "looks_like_email": false,
           "looks_like_phone": true,
           "looks_like_id_code": false,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "(555) 234-5678",
+        "(555) 345-6789",
+        "(555) 456-7890",
+        "(555) 567-8901",
+        "(555) 678-9012",
+        "(555) 789-0123"
+      ],
+      "name_embedding": [],
+      "raw_name": "telephone",
+      "data_type": "string",
+      "sample_values": [
+        "(555) 234-5678",
+        "(555) 345-6789",
+        "(555) 456-7890",
+        "(555) 567-8901",
+        "(555) 678-9012",
+        "(555) 789-0123"
+      ]
     },
     {
       "column_id": "Billing.Client.signup_date",
-      "raw_name": "signup_date",
+      "schema_name": "Billing",
       "normalized_tokens": [
         "signup",
         "date"
       ],
-      "value_sample": [
+      "value_profile": {
+        "dtype": "date",
+        "inferred_type": "date",
+        "cardinality_ratio": 1.0,
+        "null_ratio": 0.94,
+        "length_stats": null,
+        "numeric_stats": null,
+        "pattern_flags": {
+          "looks_like_email": false,
+          "looks_like_phone": false,
+          "looks_like_id_code": false,
+          "looks_like_date_string": true,
+          "looks_like_url": false
+        }
+      },
+      "sampled_values": [
         "2021-04-12",
         "2021-08-19",
         "2022-01-05",
@@ -461,40 +740,29 @@
         "2023-10-09"
       ],
       "name_embedding": [],
-      "value_profile": {
-        "dtype": "date",
-        "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
-        "length_stats": null,
-        "numeric_stats": null,
-        "pattern_flags": {
-          "looks_like_email": false,
-          "looks_like_phone": false,
-          "looks_like_id_code": false,
-          "looks_like_date_string": true
-        }
-      }
+      "raw_name": "signup_date",
+      "data_type": "date",
+      "sample_values": [
+        "2021-04-12",
+        "2021-08-19",
+        "2022-01-05",
+        "2022-06-23",
+        "2023-02-14",
+        "2023-10-09"
+      ]
     },
     {
       "column_id": "Billing.Client.credit_score",
-      "raw_name": "credit_score",
+      "schema_name": "Billing",
       "normalized_tokens": [
         "credit",
         "score"
       ],
-      "value_sample": [
-        720.0,
-        685.0,
-        750.0,
-        610.0,
-        805.0,
-        690.0
-      ],
-      "name_embedding": [],
       "value_profile": {
         "dtype": "numeric",
+        "inferred_type": "int",
         "cardinality_ratio": 1.0,
-        "null_ratio": 0.0,
+        "null_ratio": 0.94,
         "length_stats": null,
         "numeric_stats": {
           "mean": 710.0,
@@ -509,43 +777,183 @@
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": true
+          "looks_like_date_string": true,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        720.0,
+        685.0,
+        750.0,
+        610.0,
+        805.0,
+        690.0
+      ],
+      "name_embedding": [],
+      "raw_name": "credit_score",
+      "data_type": "numeric",
+      "sample_values": [
+        720.0,
+        685.0,
+        750.0,
+        610.0,
+        805.0,
+        690.0
+      ]
     },
     {
       "column_id": "Billing.Client.is_active",
-      "raw_name": "is_active",
+      "schema_name": "Billing",
       "normalized_tokens": [
         "is",
         "active"
       ],
-      "value_sample": [
-        "true",
-        "true",
-        "false",
-        "true",
-        "true",
-        "false"
-      ],
-      "name_embedding": [],
       "value_profile": {
-        "dtype": "string",
-        "cardinality_ratio": 0.3333,
-        "null_ratio": 0.0,
+        "dtype": "categorical",
+        "inferred_type": "categorical",
+        "cardinality_ratio": 0.0333,
+        "null_ratio": 0.4,
         "length_stats": {
-          "min": 4,
-          "max": 5,
-          "mean": 4.333333333333333
+          "min": 6,
+          "max": 8,
+          "mean": 6.666666666666667
         },
         "numeric_stats": null,
         "pattern_flags": {
           "looks_like_email": false,
           "looks_like_phone": false,
           "looks_like_id_code": false,
-          "looks_like_date_string": false
+          "looks_like_date_string": false,
+          "looks_like_url": false
         }
-      }
+      },
+      "sampled_values": [
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE"
+      ],
+      "name_embedding": [],
+      "raw_name": "is_active",
+      "data_type": "categorical",
+      "sample_values": [
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE",
+        "ACTIVE",
+        "ACTIVE",
+        "INACTIVE"
+      ]
     }
   ],
   "ground_truth": [
